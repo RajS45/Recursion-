@@ -1,0 +1,55 @@
+// Power Of (x,n)
+
+// -->> Brute Force ...
+
+class Solution {
+    public double myPow(double x, int n) {
+        if (n == 0 || x == 1.0) return 1; 
+        
+        long temp = n;
+        
+        if (n < 0) {
+            x = 1 / x;
+            temp = -1L * n;
+        }
+
+        double ans = 1;
+
+        for (long i = 0; i < temp; i++) {
+            ans *= x; 
+        }
+        return ans;
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.printf("%.4f\n", sol.myPow(2.0000, 10));
+        System.out.printf("%.4f\n", sol.myPow(2.0000, -2));
+    }
+}
+
+// -->> Optimal Recursive Apporoach
+
+class Solution {
+    public double myPow(double x, int n) {
+        long power = n;
+        if (power < 0) {
+            x = 1 / x;
+            power = -power;
+        }
+
+        return fastPow(x, power);
+    }
+
+    private double fastPow(double x, long n) {
+        if (n == 0) return 1.0;
+        if (n == 1) return x;
+
+        if (n % 2 != 0) {
+            return x * fastPow(x, n - 1);
+        } else {
+            return fastPow(x * x, n / 2);
+        }
+    }
+}
