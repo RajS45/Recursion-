@@ -1,0 +1,26 @@
+// Check if there exists a subsequence with sum K...
+
+class Solution {
+    public static boolean solve(int i, int n, int[] arr, int k) {
+        if (k == 0) {
+            return true;
+        }
+        if (k < 0) {
+            return false;
+        }
+        if (i == n) {
+            return k == 0;
+        }
+        return solve(i + 1, n, arr, k - arr[i]) || solve(i + 1, n, arr, k);
+    }
+    public static  boolean checkSubsequenceSum(int[] nums, int target) {
+        int n = nums.length; 
+        return solve(0, n, nums, target); 
+    }
+    public static void main(String []args){
+        int []arr ={1,2,3,4,5};
+        int k=8;
+        boolean r=checkSubsequenceSum(arr,k);
+        System.out.print(r);
+    }
+}
